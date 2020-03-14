@@ -6,11 +6,11 @@ public class BookDetails extends Book {
     private boolean isLend;
     private Person borrower;
 
-//    public BookDetails(String title, int year, Person author, boolean isLend, Person borrower) {
-//        super(title, year, author);
-//        this.isLend = isLend;
-//        this.borrower = borrower;
-//    }
+    public BookDetails(String title, int year, Person author, boolean isLend, Person borrower) {
+        super(title, year, author);
+        this.isLend = isLend;
+        this.borrower = borrower;
+    }
 
     public BookDetails(String title, int year, Person author) {
         super(title, year, author);
@@ -33,6 +33,9 @@ public class BookDetails extends Book {
     public void setBorrower(Person borrower) {
         this.borrower = borrower;
     }
+
+
+
 
     @Override
     public String toString() {
