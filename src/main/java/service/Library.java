@@ -104,8 +104,8 @@ public class Library implements LibraryRepository {
     public List<Book> searchBookByTitleAndAuthor(String title, Person author) { // I assume that firstName and lastname of author are case sensitive
         List<Book> bookListByTitleAndAuthor = new ArrayList<>();
         books.values().stream()
-                .filter(bookDetails -> bookDetails.getAuthor().equals(author) && bookDetails.getTitle().toLowerCase().contains(title.toLowerCase()))
-                .forEach(bookDetails -> bookListByTitleAndAuthor.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
+                      .filter(bookDetails -> bookDetails.getAuthor().equals(author) && bookDetails.getTitle().toLowerCase().contains(title.toLowerCase()))
+                      .forEach(bookDetails -> bookListByTitleAndAuthor.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
 
         return bookListByTitleAndAuthor;
     }
@@ -114,8 +114,8 @@ public class Library implements LibraryRepository {
     public List<Book> searchBookByTitleAndYear(String title, int year) {
         List<Book> bookListByTitleAndYear = new ArrayList<>();
         books.values().stream()
-                .filter(bookDetails -> bookDetails.getYear() == year && bookDetails.getTitle().toLowerCase().contains(title.toLowerCase()))
-                .forEach(bookDetails -> bookListByTitleAndYear.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
+                      .filter(bookDetails -> bookDetails.getYear() == year && bookDetails.getTitle().toLowerCase().contains(title.toLowerCase()))
+                      .forEach(bookDetails -> bookListByTitleAndYear.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
 
         return bookListByTitleAndYear;
     }

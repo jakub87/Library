@@ -14,10 +14,10 @@
 </ul>
 <br>
 
-<p> In order to run tests, please open GIT console or linux console and go to directory where the package has been unzip/downloaded and run below command:</p>
+<p> In order to run tests, please open console and go to directory where the package has been unzipped/downloaded and run below command:</p>
 <code>mvn surefire:test</code>
-<p>
-For running test from console view there is needed to posses Apache Maven (https://maven.apache.org/download.cgi)
+
+<p>For running tests from console view there is needed to possess Apache Maven (https://maven.apache.org/download.cgi)
 Alternatively, tests can be directly run in IDE. Tests are located at this path <i>scr/test/java/testing</i> </p>
 
 
