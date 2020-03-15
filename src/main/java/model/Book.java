@@ -17,24 +17,12 @@ public class Book {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
-        this.year = year;
-    }
-
     public Person getAuthor() {
         return author;
-    }
-
-    public void setAuthor(Person author) {
-        this.author = author;
     }
 
     @Override
@@ -54,6 +42,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "title=" + title + ", year=" + year +", author=" + author;
+        return "title=" + title + ", year=" + year + ", author=" + author;
     }
 }

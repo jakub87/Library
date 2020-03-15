@@ -11,11 +11,10 @@ public interface LibraryRepository {
     boolean removeBookById(int id);
     boolean lentBookById(int id, Person borrower);
     void showAllBooks();
-    void showAllBooksDetailsById(int id);
-    List<Book> searchBookByTitle(String title); //assume that book can have repeating title this is why I return List of books
+    String showBookDetailsById(int id);
+    List<Book> searchBookByTitle(String title);
     List<Book> searchBookByYear(int year);
     List<Book> searchBookByAuthor(Person author);
     List<Book> searchBookByTitleAndAuthor(String title, Person author);
     List<Book> searchBookByTitleAndYear(String title, int year);
-
 }

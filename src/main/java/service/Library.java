@@ -11,15 +11,20 @@ public class Library implements LibraryRepository {
     private int id;
     private Map<Integer, BookDetails> books;
 
-    public Library() {
+    public static final Library INSTANCE = new Library();
+
+    private Library() {
         id=1;
         books = new HashMap<>();
     }
 
+    public int getQuantityOfBooks(){  // needs to testing
+        return books.size();
+    } //this method is only needed for testing purpose
+
     @Override
     public boolean addNewBook(Book book) {
-        books.put(id++,new BookDetails(book.getTitle(),book.getYear(),book.getAuthor()));
-
+        books.put(id++,new BookDetails(book.getTitle(), book.getYear(), book.getAuthor()));
         return true;
     }
 
@@ -56,14 +61,13 @@ public class Library implements LibraryRepository {
 
     @Override
     public void showAllBooks() {
+        int quantityAvailableBooks = (int) books.entrySet().stream().filter(bookDetails -> !bookDetails.getValue().isLend()).count();
+        int quantityLendBooks = books.size() - quantityAvailableBooks;
 
-        int numberOfAvailableBooks = (int) books.entrySet().stream().filter(book -> !book.getValue().isLend()).count();
-        int numberOfLendBooks = books.size() - numberOfAvailableBooks;
+        books.forEach((id,bookDetails) -> System.out.println(bookDetails));
 
-        books.forEach((id,book) -> System.out.println(book));
-
-        System.out.println("Books available: " + numberOfAvailableBooks);
-        System.out.println("Books lent: " + numberOfLendBooks);
+        System.out.println("Books available: " + quantityAvailableBooks);
+        System.out.println("Books lent: " + quantityLendBooks);
     }
 
     @Override
@@ -80,24 +84,24 @@ public class Library implements LibraryRepository {
     public List<Book> searchBookByYear(int year) {
         List<Book> bookListByYear = new ArrayList<>();
         books.values().stream()
-                .filter(bookDetails -> bookDetails.getYear() == year)
-                .forEach(bookDetails -> bookListByYear.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
+                      .filter(bookDetails -> bookDetails.getYear() == year)
+                      .forEach(bookDetails -> bookListByYear.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
 
         return bookListByYear;
     }
 
     @Override
-    public List<Book> searchBookByAuthor(Person author) {
+    public List<Book> searchBookByAuthor(Person author) { // I assume that firstName and lastname of author are case sensitive
         List<Book> bookListByAuthor = new ArrayList<>();
         books.values().stream()
-                .filter(bookDetails -> bookDetails.getAuthor().equals(author))
-                .forEach(bookDetails -> bookListByAuthor.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
+                      .filter(bookDetails -> bookDetails.getAuthor().equals(author))
+                      .forEach(bookDetails -> bookListByAuthor.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
 
         return bookListByAuthor;
     }
 
     @Override
-    public List<Book> searchBookByTitleAndAuthor(String title, Person author) {
+    public List<Book> searchBookByTitleAndAuthor(String title, Person author) { // I assume that firstName and lastname of author are case sensitive
         List<Book> bookListByTitleAndAuthor = new ArrayList<>();
         books.values().stream()
                 .filter(bookDetails -> bookDetails.getAuthor().equals(author) && bookDetails.getTitle().toLowerCase().contains(title.toLowerCase()))
@@ -108,24 +112,20 @@ public class Library implements LibraryRepository {
 
     @Override
     public List<Book> searchBookByTitleAndYear(String title, int year) {
-        List<Book> bookLisByTitleAndYear = new ArrayList<>();
+        List<Book> bookListByTitleAndYear = new ArrayList<>();
         books.values().stream()
                 .filter(bookDetails -> bookDetails.getYear() == year && bookDetails.getTitle().toLowerCase().contains(title.toLowerCase()))
-                .forEach(bookDetails -> bookLisByTitleAndYear.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
+                .forEach(bookDetails -> bookListByTitleAndYear.add(new Book(bookDetails.getTitle(), bookDetails.getYear(), bookDetails.getAuthor())));
 
-        return bookLisByTitleAndYear;
+        return bookListByTitleAndYear;
     }
 
     @Override
-    public void showAllBooksDetailsById(int id) {
+    public String showBookDetailsById(int id) {
         if (bookExistById(id)) {
-            System.out.println(books.get(id));
+            return "" + books.get(id);
         } else {
-            System.out.println("Not found.");
+            return "Not found.";
         }
-    }
-
-    public Map<Integer, BookDetails> getBooks() {
-        return books;
     }
 }

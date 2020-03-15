@@ -5,145 +5,151 @@ import model.Person;
 import org.junit.jupiter.api.*;
 import service.Library;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
-
 class LibraryTests {
 
-    Library library = new Library();
+   static Library library = Library.INSTANCE;
 
-    public void init() {
-        Book book1 = new Book("aaa",2000,new Person("bbb","ccc")); //id=1
-        Book book2 = new Book("bbb",2002,new Person("xxx","ccc")); //id=2
-        Book book3 = new Book("ccc",2010,new Person("zzz","ccc")); //id=3
-        Book book4 = new Book("ddd",1960,new Person("fgh","ccc")); //id=4
-        Book book5 = new Book("Ddd part II",2020,new Person("vbn","ccc")); //id=5
-        Book book6 = new Book("fff",2009,new Person("bnm","ccc")); //id=6
-        library.addNewBook(book1);
-        library.addNewBook(book2);
-        library.addNewBook(book3);
-        library.addNewBook(book4);
-        library.addNewBook(book5);
-        library.addNewBook(book6);
+    static Person borrower = new Person("firstName", "lastName");
+    static List <Book> listTempTesting = new ArrayList<>();
+    static List <Book> listTempTesting2 = new ArrayList<>();
+    static List <Book> listTempTesting3 = new ArrayList<>();
+
+    @BeforeAll
+    public static void init() { // random data for testing
+        Book [] books = new Book[15];
+        books[0] = new Book("Hamlet",1970, new Person("William", "Shakespeare"));
+        books[1] = new Book("Lolita",2001, new Person("Vladimir", "Nabokov"));
+        books[2] = new Book("The Odyssey",2003, new Person("Vladimir", "Nabokov"));
+        books[3] = new Book("Ulysses",2002, new Person("James", "Joyce"));
+        books[4] = new Book("Moby Dick",2004, new Person("Herman", "Melville"));
+        books[5] = new Book("War and Peace",2007, new Person("Walt", "Whitman"));
+        books[6] = new Book("Leaves of Grass",2020, new Person("Walt", "Whitman"));
+        books[7] = new Book("The Magic Mountain",2003, new Person("Thomas", "Mann"));
+        books[8] = new Book("The Most Wanted: Return to Rockport part III",2012, new Person("Andreas", "Lansky"));
+        books[9] = new Book("Gone With the Wind",1970, new Person("Margaret", "Mitchell"));
+        books[10] = new Book("Lord of the Flies",2003, new Person("William", "Golding"));
+        books[11] = new Book("Emma",2003, new Person("Jane", "Austen"));
+        books[12] = new Book("On the Road",1998, new Person("Jack", "Kerouac"));
+        books[13] = new Book("The Most Wanted: Return to Rockport",2009, new Person("Andreas", "Lansky"));
+        books[14] = new Book("The Most Wanted: Return to Rockport part II",2010, new Person("Andreas", "Lansky"));
+
+        for (Book book : books) {
+            library.addNewBook(book);
+        }
+
+        listTempTesting.add(books[13]);
+        listTempTesting.add(books[14]);
+        listTempTesting.add(books[8]);
+
+        listTempTesting2.add(books[3]);
+
+        listTempTesting3.add(books[0]);
+        listTempTesting3.add(books[9]);
     }
 
-
-    @DisplayName("check if books has been added")
     @Test
     public void addNewBookTest() {
-        Book book1 = new Book("aaa",2000,new Person("bbb","ccc"));
-        Book book2 = new Book("bbb",2010,new Person("ddd","aaa"));
-        Book book3 = new Book("ccc",2020,new Person("eee","fff"));
+        Book book1 = new Book("test1",2000, new Person("name1","surname1"));
+        Book book2 = new Book("test2",2010, new Person("name2","surname2"));
+        Book book3 = new Book("test2",2020, new Person("name3","surname3"));
 
         Assertions.assertAll(
-                () -> Assertions.assertEquals(0,library.getBooks().size()),
+                () -> Assertions.assertEquals(15, library.getQuantityOfBooks()),
                 () -> Assertions.assertTrue(library.addNewBook(book1)),
                 () -> Assertions.assertTrue(library.addNewBook(book2)),
-                () -> Assertions.assertEquals(2,library.getBooks().size()),
+                () -> Assertions.assertEquals(17, library.getQuantityOfBooks()),
                 () -> Assertions.assertTrue(library.addNewBook(book3)),
-                () -> Assertions.assertEquals(3,library.getBooks().size())
+                () -> Assertions.assertEquals(18, library.getQuantityOfBooks())
         );
     }
 
-    @DisplayName("check if book by id exists")
     @Test
     public void bookExistByIdTest() {
-        init();
-
         Assertions.assertAll(
                 () -> Assertions.assertTrue(library.bookExistById(1)),
-                () -> Assertions.assertTrue(library.bookExistById(3)),
-                () -> Assertions.assertTrue(library.bookExistById(6)),
+                () -> Assertions.assertTrue(library.bookExistById(15)),
                 () -> Assertions.assertFalse(library.bookExistById(0)),
-                () -> Assertions.assertFalse(library.bookExistById(7))
+                () -> Assertions.assertFalse(library.bookExistById(-9)),
+                () -> Assertions.assertFalse(library.bookExistById(20))
         );
     }
 
-    @DisplayName("check if book by id can be removed")
-    @Test
-    public void removeBookByIdTest() {
-        init();
-
-        Assertions.assertAll(
-                () -> Assertions.assertTrue(library.removeBookById(1)),
-                () -> Assertions.assertTrue(library.removeBookById(6)),
-                () -> Assertions.assertFalse(library.removeBookById(0)),
-                () -> Assertions.assertFalse(library.removeBookById(-9)),
-                () -> Assertions.assertFalse(library.removeBookById(7))
-        );
-    }
-
-    @DisplayName("check if book can be lend")
     @Test
     public void lentBookByIdTest() {
-        init();
-        Person borrower = new Person("firstName","lastName");
-
         Assertions.assertAll(
-                () -> Assertions.assertFalse(library.lentBookById(0,borrower)),
-                () -> Assertions.assertFalse(library.lentBookById(7,borrower)),
-                () -> Assertions.assertTrue(library.lentBookById(1,borrower)),
-                () -> Assertions.assertFalse(library.lentBookById(1,borrower)),
-                () -> Assertions.assertTrue(library.lentBookById(5,borrower))
+                () -> Assertions.assertFalse(library.lentBookById(0, borrower)),
+                () -> Assertions.assertFalse(library.lentBookById(-3, borrower)),
+                () -> Assertions.assertTrue(library.lentBookById(7, borrower)),
+                () -> Assertions.assertFalse(library.lentBookById(7, borrower))
         );
     }
 
-    @DisplayName("return books which contain specific title")
+    @Test
+    public void removeBookByIdTest() {
+        library.lentBookById(10, borrower);
+        Assertions.assertAll(
+                () -> Assertions.assertFalse(library.removeBookById(10)),
+                () -> Assertions.assertTrue(library.removeBookById(1)),
+                () -> Assertions.assertFalse(library.removeBookById(-9)),
+                () -> Assertions.assertFalse(library.removeBookById(20))
+        );
+    }
+
     @Test
     public void searchBookByTitleTest() {
-        init();
-
-        Book book2 = new Book("bbb",2002,new Person("xxx","ccc"));
-        List <Book> temp = new ArrayList<>();
-        temp.add(book2);
-
-        List <Book> dupa = library.searchBookByTitle("bbb");
-
         Assertions.assertAll(
-                () -> Assertions.assertEquals(new ArrayList<>(),library.searchBookByTitle("test"))
+                () -> Assertions.assertEquals(new ArrayList<>(), library.searchBookByTitle("test")),
+                () -> Assertions.assertTrue(listTempTesting.containsAll(library.searchBookByTitle("the most wanted"))),
+                () -> Assertions.assertEquals(listTempTesting2, library.searchBookByTitle("ulysses"))
         );
-
     }
-
 
     @Test
     public void searchBookByYearTest() {
-        init();
-
-        List<Book> listTemp = new ArrayList<>();
-        listTemp.add(new Book("Ddd part II",2020,new Person("vbn","ccc")));
-
         Assertions.assertAll(
-                () -> Assertions.assertEquals(listTemp,library.searchBookByYear(2020))
+                () -> Assertions.assertEquals(new ArrayList<>(), library.searchBookByYear(2030)),
+                () -> Assertions.assertEquals(new ArrayList<>(), library.searchBookByYear(-2030)),
+                () -> Assertions.assertEquals(listTempTesting2, library.searchBookByYear(2002)),
+                () -> Assertions.assertEquals(listTempTesting3, library.searchBookByYear(1970))
         );
-
     }
 
+    @Test
+    public void searchBookByAuthorTest() {
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(new ArrayList<>(), library.searchBookByAuthor(new Person("test","test"))),
+                () -> Assertions.assertEquals(listTempTesting2, library.searchBookByAuthor(new Person("James", "Joyce"))),
+                () -> Assertions.assertTrue(listTempTesting.containsAll(library.searchBookByAuthor(new Person("andreas", "Lansky"))))
+        );
+    }
 
-   // main main;
+    @Test
+    public void searchBookByTitleAndAuthorTest() {
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(new ArrayList<>(), library.searchBookByTitleAndAuthor("title", new Person("test","test"))),
+                () -> Assertions.assertTrue(listTempTesting.containsAll(library.searchBookByTitleAndAuthor("the most wanted: return to rockport", new Person("andreas","lansky"))))
+        );
+    }
 
+    @Test
+    public void searchBookByTitleAndYearTest() {
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(new ArrayList<>(), library.searchBookByTitleAndYear("title",1980)),
+                () -> Assertions.assertEquals(new ArrayList<>(), library.searchBookByTitleAndYear("title",-1999)),
+                () -> Assertions.assertEquals(listTempTesting2, library.searchBookByTitleAndYear("ulysses",2002))
+        );
+    }
 
-//
-//    @Test
-//    void dodajTest() {
-////        Assertions.assertEquals(10,main.dodaj(5,5));
-////        Assertions.assertEquals(15,main.dodaj(10,5));
-//
-//        Assertions.assertAll(
-//                () -> Assertions.assertEquals(10,main.dodaj(5,5)),
-//                () -> Assertions.assertEquals(20,main.dodaj(15,5))
-//
-//        );
-//
-//    }
-//
-////    assertAll(
-////                ()-> assertEquals(4,liczby.dodaj(2,2)),
-////            ()-> assertEquals(5,liczby.dodaj(3,2)),
-////            ()-> assertEquals(1,liczby.dodaj(2,-1))
-////
-////            );
-
+    @Test
+    public void showBookDetailsByIdTest() {
+        library.lentBookById(12, borrower);
+        Assertions.assertAll(
+                () -> Assertions.assertEquals("Not found.",library.showBookDetailsById(0)),
+                () -> Assertions.assertEquals("title: Hamlet, author= first name: William, last name: Shakespeare, year: 1970, is lent? false",library.showBookDetailsById(1)),
+                () -> Assertions.assertEquals("title: Emma, author= first name: Jane, last name: Austen, year: 2003, is lent? true, borrower= first name: firstName, last name: lastName",library.showBookDetailsById(12))
+          );
+    }
 }
