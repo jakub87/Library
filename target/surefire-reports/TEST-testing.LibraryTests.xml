@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="testing.LibraryTests" time="0.127" tests="10" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="testing.LibraryTests" time="0.076" tests="10" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="13"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="PL"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-13.0.1\bin"/>
-    <property name="sun.java.command" value="C:\Users\Jakub\AppData\Local\Temp\surefire3412651214923864034\surefirebooter16880516845517777956.jar C:\Users\Jakub\AppData\Local\Temp\surefire3412651214923864034 2020-03-15T21-02-26_046-jvmRun1 surefire15078031895004317716tmp surefire_02613479596518950184tmp"/>
+    <property name="sun.java.command" value="C:\Users\Jakub\AppData\Local\Temp\surefire9189584607000035342\surefirebooter10473740552321581427.jar C:\Users\Jakub\AppData\Local\Temp\surefire9189584607000035342 2020-03-15T21-20-18_741-jvmRun1 surefire5810942088664610785tmp surefire_08940846411314192563tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Jakub\Desktop\projects_java\task\target\test-classes;C:\Users\Jakub\Desktop\projects_java\task\target\classes;C:\Users\Jakub\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.4.0\junit-jupiter-engine-5.4.0.jar;C:\Users\Jakub\.m2\repository\org\apiguardian\apiguardian-api\1.0.0\apiguardian-api-1.0.0.jar;C:\Users\Jakub\.m2\repository\org\junit\platform\junit-platform-engine\1.4.0\junit-platform-engine-1.4.0.jar;C:\Users\Jakub\.m2\repository\org\opentest4j\opentest4j\1.1.1\opentest4j-1.1.1.jar;C:\Users\Jakub\.m2\repository\org\junit\platform\junit-platform-commons\1.4.0\junit-platform-commons-1.4.0.jar;C:\Users\Jakub\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.4.0\junit-jupiter-api-5.4.0.jar;C:\Users\Jakub\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.4.0\junit-jupiter-params-5.4.0.jar;C:\Users\Jakub\.m2\repository\org\assertj\assertj-core\3.12.0\assertj-core-3.12.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Jakub\AppData\Local\Temp\surefire3412651214923864034\surefirebooter16880516845517777956.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Jakub\AppData\Local\Temp\surefire9189584607000035342\surefirebooter10473740552321581427.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="13.0.1+9"/>
@@ -55,14 +55,14 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="57.0"/>
   </properties>
-  <testcase name="searchBookByTitleAndYearTest" classname="testing.LibraryTests" time="0.039"/>
+  <testcase name="searchBookByTitleAndYearTest" classname="testing.LibraryTests" time="0.029"/>
   <testcase name="showBookDetailsByIdTest" classname="testing.LibraryTests" time="0.002"/>
-  <testcase name="searchBookByAuthorTest" classname="testing.LibraryTests" time="0.007"/>
-  <testcase name="searchBookByTitleTest" classname="testing.LibraryTests" time="0.01"/>
-  <testcase name="addNewBookTest" classname="testing.LibraryTests" time="0.013"/>
-  <testcase name="bookExistByIdTest" classname="testing.LibraryTests" time="0.005"/>
-  <testcase name="searchBookByYearTest" classname="testing.LibraryTests" time="0.003"/>
-  <testcase name="removeBookByIdTest" classname="testing.LibraryTests" time="0.014"/>
-  <testcase name="searchBookByTitleAndAuthorTest" classname="testing.LibraryTests" time="0"/>
-  <testcase name="lentBookByIdTest" classname="testing.LibraryTests" time="0.001"/>
+  <testcase name="searchBookByAuthorTest" classname="testing.LibraryTests" time="0.013"/>
+  <testcase name="searchBookByTitleTest" classname="testing.LibraryTests" time="0"/>
+  <testcase name="addNewBookTest" classname="testing.LibraryTests" time="0.004"/>
+  <testcase name="bookExistByIdTest" classname="testing.LibraryTests" time="0.003"/>
+  <testcase name="searchBookByYearTest" classname="testing.LibraryTests" time="0.002"/>
+  <testcase name="removeBookByIdTest" classname="testing.LibraryTests" time="0.002"/>
+  <testcase name="searchBookByTitleAndAuthorTest" classname="testing.LibraryTests" time="0.002"/>
+  <testcase name="lentBookByIdTest" classname="testing.LibraryTests" time="0.002"/>
 </testsuite>

@@ -10,7 +10,8 @@
 </ul>
  or
 <ul>
-  <li> in GIT Bash console by typing this command: <code>git@github.com:jakub87/Library.git </code></li>
+  <li> in GIT Bash console by typing this command: <code>git clone https://github.com/jakub87/Library.git
+</code></li>
 </ul>
 <br>
 
